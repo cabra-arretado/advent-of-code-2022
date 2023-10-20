@@ -38,7 +38,6 @@ func read_file(file_path string) int {
 		}
 		total_cal = 0
 	}
-	fmt.Println(max_cal)
 	return max_cal
 }
 
