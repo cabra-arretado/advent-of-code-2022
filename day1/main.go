@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func read_file(file_path string) {
+func read_file(file_path string) int {
 	file, err := os.Open(file_path)
 	if err != nil {
 		panic(err)
@@ -39,9 +39,12 @@ func read_file(file_path string) {
 		total_cal = 0
 	}
 
+	return total_cal
+
 }
 
 func main() {
 	file := "./input.txt"
-	read_file(file)
+	answer := read_file(file)
+	fmt.Println(answer)
 }
