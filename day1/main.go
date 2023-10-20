@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"sort"
 )
 
-func read_file(file_path string) int {
+func read_file(file_path string) []int {
 	file, err := os.Open(file_path)
 	if err != nil {
 		panic(err)
@@ -16,8 +17,8 @@ func read_file(file_path string) int {
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 
+	list := []int{}
 	total_cal := 0
-	max_cal := 0
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -29,20 +30,20 @@ func read_file(file_path string) int {
 			total_cal += cal
 			continue
 		}
-		if total_cal > max_cal {
-			fmt.Println("max_calories")
-			fmt.Println(max_cal)
-			fmt.Println("total_calories")
-			fmt.Println(total_cal)
-			max_cal = total_cal
-		}
+		list = append(list, total_cal)
 		total_cal = 0
 	}
-	return max_cal
+	sort.Sort(sort.Reverse(sort.IntSlice(list)))
+	return list[:3]
 }
 
 func main() {
 	file := "./input.txt"
 	answer := read_file(file)
-	fmt.Println(answer)
+	fmt.Println("first question:", answer[0])
+	total := 0 
+	for v := range answer {
+		total += answer[v]
+	}
+	fmt.Println("second question:", total)
 }
