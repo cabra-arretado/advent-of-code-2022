@@ -1,7 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
+
+func read_file(file string) {
+	dt, err := os.ReadFile(file)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Print(dt)
+}
 
 func main() {
-  fmt.Println("Day 1")
+	file := "./input.txt"
+	read_file(file)
 }
