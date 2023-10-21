@@ -25,7 +25,14 @@ func read_file(file_path string) int {
 	return total
 }
 
-func process_line(l string) int{
+func process_line(l string) int {
+	// For Question 2
+	// A: Rock : 1 point
+	// B: Paper : 2 points
+	// C: Scissors : 3 points
+	// X: 0 points for loss
+	// Y: 3 points for draw
+	// Z: points for win
 	s := strings.Split(l, " ")
 	sum := 0
 	switch s[1] {
@@ -61,6 +68,7 @@ func process_line(l string) int{
 	}
 	return sum
 }
+
 // For Question 2
 // A: Rock : 1 point
 // B: Paper : 2 points
@@ -68,6 +76,7 @@ func process_line(l string) int{
 // X: 0 points for loss
 // Y: 3 points for draw
 // Z: points for win
+
 func main() {
 	fmt.Println(read_file("./input.txt"))
 	// Tests Question 2
@@ -123,4 +132,3 @@ func process_line(l string) int {
 	return sum
 }
 */
-
