@@ -1,10 +1,11 @@
 package main
 
 import (
-	"slices"
+	// "slices"
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func read_file(file_path string) *bufio.Scanner {
@@ -31,29 +32,27 @@ func process_input(file_path string) int {
 }
 
 func process_line(l string) int {
-	rune_arr := []rune(l)
-	half_index := len(rune_arr) / 2
-	arr_a := rune_arr[:half_index]
-	arr_b := rune_arr[half_index:]
+	half_index := len(l) / 2
+	arr_a := l[:half_index]
+	arr_b := l[half_index:]
 
-	for e := range arr_a{
-		if slices.Contains(arr_b, e){
-			return e
+	for i := range arr_a {
+		if strings.ContainsRune(arr_b, rune(arr_a[i])) {
+			fmt.Println(arr_a[i])
 		}
 	}
-		
+
 	return 0
 }
 
 func main() {
 	// read_file("./input.txt")
 
-
 	// Test cases
 	test_1 := process_line("vJrwpWtwJgWrhcsFMMfFFhFp")
-	test_2 := process_line("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL")
-	test_3 := process_line("PmmdzqPrVvPwwTWBwg")
+	// test_2 := process_line("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL")
+	// test_3 := process_line("PmmdzqPrVvPwwTWBwg")
 	fmt.Println(test_1 == 16)
-	fmt.Println(test_2 == 38)
-	fmt.Println(test_3 == 42)
+	// fmt.Println(test_2 == 38)
+	// fmt.Println(test_3 == 42)
 }
