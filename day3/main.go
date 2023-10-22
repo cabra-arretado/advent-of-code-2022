@@ -22,7 +22,7 @@ func read_file(file_path string) int {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if len(buffer) < 3{
+		if len(buffer) < 3 {
 			buffer = append(buffer, line)
 		} else {
 			total += process_line(buffer)
@@ -54,8 +54,11 @@ func process_line(buffer []string) int {
 			seen = append(seen, int(c))
 		}
 	}
+	var seen2 []int
 	for _, c := range buffer[2] {
-		if slices.Contains(seen, int(c)){
+		i_c := int(c)
+		if slices.Contains(seen, i_c) && !slices.Contains(seen2, i_c){
+			seen2 = append(seen2, i_c)
 			total += convert_rune(c)
 		}
 	}
@@ -79,8 +82,22 @@ func process_line_q1(l string) int {
 }
 
 func main() {
-	fmt.Println("First answer: ", read_file("./input.txt"))
+	fmt.Println("second answer: ", read_file("./input.txt"))
 
 	// Test question 2
-
+	slice := []string{
+		"vJrwpWtwJgWrhcsFMMfFFhFp",
+		"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+		"PmmdzqPrVvPwwTWBwg",
+	}
+	slice2 := []string{
+		"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+		"ttgJtRGJQctTZtZT",
+		"CrZsJsPPZsGzwwsLwLmpwMDw",
+	}
+	// fmt.Println(process_line(slice))
+	// fmt.Println(process_line(slice) == 18)
+	// fmt.Println(process_line(slice2))
+	// fmt.Println(process_line(slice2) == 52)
+	fmt.Println(process_line(slice) + process_line(slice2))
 }
