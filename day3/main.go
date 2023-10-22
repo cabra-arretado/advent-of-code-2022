@@ -18,9 +18,16 @@ func read_file(file_path string) int {
 	scanner.Split(bufio.ScanLines)
 	total := 0
 
+	var buffer []string
+
 	for scanner.Scan() {
 		line := scanner.Text()
-		total += process_line(line)
+		if len(buffer) < 3{
+			buffer = append(buffer, line)
+		} else {
+			total += process_line(buffer)
+			buffer = []string{}
+		}
 	}
 	return total
 }
@@ -39,7 +46,23 @@ func convert_rune(c rune) int {
 	panic("Did not have a match")
 }
 
-func process_line(l string) int {
+func process_line(buffer []string) int {
+	var total int
+	var seen []int
+	for _, c := range buffer[0] {
+		if strings.ContainsRune(buffer[1], c) && !slices.Contains(seen, int(c)) {
+			seen = append(seen, int(c))
+		}
+	}
+	for _, c := range buffer[2] {
+		if slices.Contains(seen, int(c)){
+			total += convert_rune(c)
+		}
+	}
+	return total
+}
+
+func process_line_q1(l string) int {
 	half_index := len(l) / 2
 	arr_a := l[:half_index]
 	arr_b := l[half_index:]
@@ -57,4 +80,7 @@ func process_line(l string) int {
 
 func main() {
 	fmt.Println("First answer: ", read_file("./input.txt"))
+
+	// Test question 2
+
 }
