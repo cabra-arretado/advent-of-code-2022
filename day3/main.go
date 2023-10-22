@@ -1,14 +1,14 @@
 package main
 
 import (
-	// "slices"
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 )
 
-func read_file(file_path string) *bufio.Scanner {
+func read_file(file_path string) int {
 	file, err := os.Open(file_path)
 	if err != nil {
 		panic(err)
@@ -16,13 +16,7 @@ func read_file(file_path string) *bufio.Scanner {
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
-	return scanner
-}
-
-func process_input(file_path string) int {
 	total := 0
-
-	scanner := read_file(file_path)
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -34,13 +28,13 @@ func process_input(file_path string) int {
 func convert_rune(c rune) int {
 	// Lowercase item types a through z have priorities 1 through 26.
 	// Uppercase item types A through Z have priorities 27 through 52.
-	// Convert rune into the numbers given by the day3
+	// Convert rune into the numbers given by the day3 q1
 	ci := int(c)
 
 	if ci >= 97 && ci <= 122 {
 		return ci - 96
 	} else if ci >= 65 && ci <= 90 {
-		return ci - 64 + 26
+		return ci - 38
 	}
 	panic("Did not have a match")
 }
@@ -51,24 +45,16 @@ func process_line(l string) int {
 	arr_b := l[half_index:]
 
 	var total int
+	var seen []int
 	for _, c := range arr_a {
-		if strings.ContainsRune(arr_b, c) {
+		if strings.ContainsRune(arr_b, c) && !slices.Contains(seen, int(c)) {
 			total += convert_rune(c)
+			seen = append(seen, int(c))
 		}
 	}
 	return total
 }
 
 func main() {
-	// read_file("./input.txt")
-
-	// Test cases
-	// test_1 := process_line("vJrwpWtwJgWrhcsFMMfFFhFp")
-	test_2 := process_line("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL")
-	test_3 := process_line("PmmdzqPrVvPwwTWBwg")
-	// fmt.Println(test_1 == 16)
-	fmt.Println(test_2)
-	fmt.Println(test_2 == 38)
-	fmt.Println(test_3)
-	fmt.Println(test_3 == 42)
+	fmt.Println("First answer: ", read_file("./input.txt"))
 }
