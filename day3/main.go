@@ -19,16 +19,20 @@ func read_file(file_path string) int {
 	total := 0
 
 	var buffer []string
+	var counter int
+
 
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(buffer) < 3 {
 			buffer = append(buffer, line)
-		} else {
+		} 
+		if len(buffer) == 3 {
 			total += process_line(buffer)
 			buffer = []string{}
 		}
 	}
+	fmt.Println("lines >>", counter)
 	return total
 }
 
@@ -95,9 +99,5 @@ func main() {
 		"ttgJtRGJQctTZtZT",
 		"CrZsJsPPZsGzwwsLwLmpwMDw",
 	}
-	// fmt.Println(process_line(slice))
-	// fmt.Println(process_line(slice) == 18)
-	// fmt.Println(process_line(slice2))
-	// fmt.Println(process_line(slice2) == 52)
-	fmt.Println(process_line(slice) + process_line(slice2))
+	fmt.Println(process_line(slice) + process_line(slice2) == 70)
 }
