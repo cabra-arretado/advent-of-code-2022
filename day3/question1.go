@@ -41,9 +41,6 @@ func processLineQ1(l string) int {
 
 
 func testQ1(){
-
-	readFileQ1("./input.txt")
-
 	// Test cases
 	test_1 := processLineQ1("vJrwpWtwJgWrhcsFMMfFFhFp")
 	test_2 := processLineQ1("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL")
