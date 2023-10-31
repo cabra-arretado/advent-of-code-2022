@@ -12,7 +12,6 @@ func processLineQ2(s string) int {
 	if err != nil {
 		panic(err)
 	}
-	//TODO: Correct this logic
 	if !(aEnd < bBegin || bEnd < aBegin) {
 		return 1
 	}
