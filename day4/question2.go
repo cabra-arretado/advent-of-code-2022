@@ -12,13 +12,8 @@ func processLineQ2(s string) int {
 	if err != nil {
 		panic(err)
 	}
-	// If a touches b
 	//TODO: Correct this logic
-	if aBegin <= bBegin && aEnd >= bEnd {
-		return 1
-	}
-	// If b touches a
-	if bBegin <= aBegin && bEnd >= aEnd {
+	if !(aEnd < bBegin || bEnd < aBegin) {
 		return 1
 	}
 	return 0
