@@ -3,44 +3,37 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"strings"
 )
 
 func processLineQ1(s string) int {
-	arr := strings.Split(s, ",")
-	if contains(arr[0], arr[1]) {
+	var aBegin, aEnd, bBegin, bEnd int
+	_, err := fmt.Sscanf(s, "%d-%d,%d-%d", &aBegin, &aEnd, &bBegin, &bEnd)
+	if err != nil {
+		panic(err)
+	}
+	// If A contains B
+	if aBegin <= bBegin && aEnd >= bEnd {
 		return 1
 	}
-	return 0
+	// If B contains A
+	if bBegin <= aBegin && bEnd >= aEnd {
+		return 1
+	}
+return 0
 }
 
-func contains(s1 string, s2 string) bool {
-	arrA := strings.Split(s1, "-")
-	arrB := strings.Split(s2, "-")
-	// Check the left side first
-	if arrA[0] <= arrB[0] && arrA[1] >= arrB[1] {
-		return true
-	}
-	if arrB[0] <= arrA[0] && arrB[1] >= arrA[1] {
-		return true
-	}
-	return false
-}
 
 func callbackQuestion1(scanner *bufio.Scanner) int {
 	total := 0
-	lines := 0
 	for scanner.Scan() {
 		line := scanner.Text()
 		total += processLineQ1(line)
-		lines++
 	}
-	fmt.Println(lines)
 	return total
 }
 
 func answerQ1(file_path string) {
-	fmt.Println(readFile(file_path, callbackQuestion1))
+	fmt.Println("Question 1:", readFile(file_path, callbackQuestion1))
 }
 
 func testQuestion1() {
