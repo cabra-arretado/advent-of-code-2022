@@ -21,11 +21,22 @@ The matrix is 9x35 containig trailing spaces int the end if needed
  1   2   3   4   5   6   7   8   9 
 */
 
+
 func processLineQ1(s string) int {
 	return 0
 }
 
 func callbackQ1(scanner *bufio.Scanner) int {
+	// fmt.Printf("scanner.Scan(): %v\n", scanner.Scan())
+	// fmt.Printf("scanner.Scan(): %v\n", scanner.Text())
+	// fmt.Printf("scanner.Scan(): %v\n", scanner.Scan())
+	// fmt.Printf("scanner.Scan(): %v\n", scanner.Text())
+	// var a, b, c, d, e, f, g, h, i []string
+	for i := 0; i < 8; i++ {
+		scanner.Scan()
+		line := scanner.Text()
+		fmt.Println(string(line[1]))
+	}
 	return 0
 }
 
